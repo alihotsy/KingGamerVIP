@@ -13,7 +13,7 @@
         </li>
         <li>
           <router-link to="/noticias">
-            <i class="fas fa-box-open"></i>Noticias
+            <i class="fas fa-newspaper"></i>Noticias
           </router-link>
         </li>
         <!-- <li>
