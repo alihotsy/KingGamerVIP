@@ -4,15 +4,17 @@
       <img src="/assets/KingGamerLogo.png" alt="" class="logo" />
       <ul class="nav__menu">
         <li>
-          <router-link to="/"> <i class="fas fa-home"></i>Inicio </router-link>
+          <router-link active-class="active" to="/">
+            <i class="fas fa-home"></i>Inicio
+          </router-link>
         </li>
         <li>
-          <router-link to="/productos">
+          <router-link active-class="active" to="/productos">
             <i class="fas fa-box-open"></i>Productos
           </router-link>
         </li>
         <li>
-          <router-link to="/noticias">
+          <router-link active-class="active" to="/noticias">
             <i class="fas fa-box-open"></i>Noticias
           </router-link>
         </li>
@@ -33,7 +35,7 @@
     <hr />
     <div class="fondo"></div>
     <div class="text">
-      <h1>King Gamer</h1>
+      <h1>KinGamer</h1>
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Perferendis
         officia culpa asperiores, minima tempore tempora suscipit? Accusantium
@@ -51,6 +53,9 @@
 <script>
 export default {
   name: "Header2",
+  data: () => ({
+    pathname: window.location.pathname,
+  }),
 };
 </script>
 <style lang=""></style>

@@ -7,12 +7,12 @@
           <router-link to="/"> <i class="fas fa-home"></i>Inicio </router-link>
         </li> -->
         <li>
-          <router-link to="/admin/productos">
+          <router-link active-class="active" to="/admin/productos">
             <i class="fas fa-box-open"></i>Productos
           </router-link>
         </li>
         <li>
-          <router-link to="/admin/noticias">
+          <router-link active-class="active" to="/admin/noticias">
             <i class="fas fa-box-open"></i>Noticias
           </router-link>
         </li>
