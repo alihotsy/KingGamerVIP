@@ -1,5 +1,7 @@
 <template>
+  <h2 class="title-section">Últimos Productos</h2>
   <Product />
+  <h2 class="title-section2">Las Últimas Noticias</h2>
   <News />
   <Team />
   <Footer />

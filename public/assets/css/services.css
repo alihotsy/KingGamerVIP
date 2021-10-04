@@ -2,7 +2,7 @@
     width: 100%;
     padding: 10px 50px;
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     justify-content: space-between;
     box-sizing: border-box;
 
@@ -29,11 +29,11 @@
 .product-item {
     background-image: linear-gradient(to right top, #2a00ff, #ff009d, #ff0033, #ffa900, #c5ff00);
     display: flex;
-    position: relative;
+    /* position: relative; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 200px;
+    width: 500px;
     padding: 5px 15px;
     border-radius: 8px;
     margin: 10px;

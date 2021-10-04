@@ -8,7 +8,7 @@
           data-bs-target="#exampleModal"
           @click="reset()"
         >
-          <i class="fas fa-cart-plus"></i> Nuevo producto
+          <i class="fas fa-cart-plus"></i> Nueva noticia
         </button>
       </div>
 
@@ -18,33 +18,39 @@
           <tr>
             <td>#</td>
             <td>Nombre</td>
-            <td>Imagen</td>
-            <td>Link de compra</td>
+            <td>Imagen de portada</td>
+            <td>Fecha de publicación</td>
+            <td>Estado</td>
             <td>Acciones</td>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(product, i) of products" :key="product.id">
-            <td>{{ i + 1 }}</td>
-            <td>{{ product.name }}</td>
+          <tr v-for="(News, i) of news" :key="News.id">
+            <td>{{ parseInt(i) + 1 }}</td>
+            <td>{{ News.title }}</td>
             <td>
               <img
-                :src="`http://localhost:3001/load/image/${product.image}`"
-                :alt="product.name"
+                :src="`http://localhost:3001/load/image/${News.image}`"
+                :alt="News.title"
                 height="100"
               />
             </td>
+            <td>{{ moment(News.created_at).format("LL") }}</td>
             <td>
-              <a target="_blank" :href="product.urlBuy" class="btn btn-primary"
-                ><i class="fas fa-shopping-cart"></i
-              ></a>
+              <!-- News.state -->
+              <button
+                :class="News.state ? 'btn btn-success' : 'btn btn-danger'"
+                @click="changeState(News._id, News.state)"
+              >
+                <i class="fas fa-toggle-on"></i>
+              </button>
             </td>
             <td>
               <button
                 class="btn btn-info"
                 data-bs-toggle="modal"
                 data-bs-target="#modal_show"
-                @click="setProduct(product)"
+                @click="setProduct(News)"
               >
                 <i class="fas fa-eye"></i>
               </button>
@@ -52,11 +58,11 @@
                 class="btn btn-warning"
                 data-bs-toggle="modal"
                 data-bs-target="#modal_edit"
-                @click="setProduct(product)"
+                @click="setProduct(News)"
               >
                 <i class="fas fa-edit"></i>
               </button>
-              <button class="btn btn-danger" @click="deleteProduct(product)">
+              <button class="btn btn-danger" @click="deleteProduct(News)">
                 <i class="fas fa-trash-alt"></i>
               </button>
             </td>
@@ -92,19 +98,19 @@
           <br />
           <br />
           <form class="productos__form">
-            <h1 class="header-title">Productos</h1>
+            <h1 class="header-title">Noticia</h1>
             <div class="productos__form-campo">
               <label class="title" for="">Nombre</label>
-              <input class="input" type="text" v-model="form.name" />
+              <input class="input" type="text" v-model="form.title" />
             </div>
             <div class="productos__form-campo">
               <label class="title" for="">Descripción</label>
               <textarea class="area edit" v-model="form.description"></textarea>
             </div>
-            <div class="productos__form-campo">
+            <!-- <div class="productos__form-campo">
               <label class="title" for="">URL de la compra</label>
               <input class="input" type="text" v-model="form.urlBuy" />
-            </div>
+            </div> -->
             <div class="productos__form-campo">
               <label class="title" for="">Imagen URL</label>
               <input class="input" type="file" @change="loadImage" />
@@ -121,10 +127,10 @@
             <!-- <button class="button2" @click="registerProduct()">
               Registrar
             </button> -->
-            <!-- <span class="span1"></span>
+            <span class="span1"></span>
             <span class="span2"></span>
             <span class="span3"></span>
-            <span class="span4"></span> -->
+            <span class="span4"></span>
           </form>
         </div>
         <div class="modal-footer">
@@ -159,7 +165,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            Producto
+            Noticia
           </h5>
           <button
             type="button"
@@ -172,10 +178,10 @@
           <br />
           <br />
           <form class="productos__form">
-            <h1 class="header-title">Productos</h1>
+            <h1 class="header-title">Noticia</h1>
             <div class="productos__form-campo">
               <label class="title" for="">Nombre</label>
-              <input disabled class="input" type="text" v-model="form.name" />
+              <input disabled class="input" type="text" v-model="form.title" />
             </div>
             <div class="productos__form-campo">
               <label class="title" for="">Descripción</label>
@@ -185,10 +191,10 @@
                 v-model="form.description"
               ></textarea>
             </div>
-            <div class="productos__form-campo">
+            <!-- <div class="productos__form-campo">
               <label class="title" for="">URL de la compra</label>
               <input disabled class="input" type="text" v-model="form.urlBuy" />
-            </div>
+            </div> -->
             <!-- <div class="productos__form-campo">
               <label class="title" for="">Imagen URL</label>
               <input disabled class="input" type="file" @change="loadImage" />
@@ -205,10 +211,10 @@
             <!-- <button class="button2" @click="registerProduct()">
               Registrar
             </button> -->
-            <!-- <span class="span1"></span>
+            <span class="span1"></span>
             <span class="span2"></span>
             <span class="span3"></span>
-            <span class="span4"></span> -->
+            <span class="span4"></span>
           </form>
         </div>
         <div class="modal-footer">
@@ -250,19 +256,19 @@
           <br />
           <br />
           <form class="productos__form">
-            <h1 class="header-title">Productos</h1>
+            <h1 class="header-title">Noticia</h1>
             <div class="productos__form-campo">
               <label class="title" for="">Nombre</label>
-              <input class="input" type="text" v-model="form.name" />
+              <input class="input" type="text" v-model="form.title" />
             </div>
             <div class="productos__form-campo">
               <label class="title" for="">Descripción</label>
               <textarea class="area edit" v-model="form.description"></textarea>
             </div>
-            <div class="productos__form-campo">
+            <!-- <div class="productos__form-campo">
               <label class="title" for="">URL de la compra</label>
               <input class="input" type="text" v-model="form.urlBuy" />
-            </div>
+            </div> -->
             <div class="productos__form-campo">
               <label class="title" for="">Imagen URL</label>
               <input class="input" type="file" @change="loadImage" />
@@ -275,10 +281,10 @@
             <!-- <button class="button2" @click="registerProduct()">
               Registrar
             </button> -->
-            <!-- <span class="span1"></span>
+            <span class="span1"></span>
             <span class="span2"></span>
             <span class="span3"></span>
-            <span class="span4"></span> -->
+            <span class="span4"></span>
           </form>
         </div>
         <div class="modal-footer">
@@ -308,6 +314,9 @@
 import Footer from "../../../components/Footer.vue";
 import axios from "axios";
 import Swal from "sweetalert2";
+import moment from "moment";
+import "moment/locale/es";
+moment.locale("es"); // aca ya esta en es
 
 export default {
   name: "App",
@@ -316,12 +325,13 @@ export default {
   },
   data: () => ({
     form: {
-      name: "",
+      title: "",
       description: "",
       image: "",
       urlBuy: "",
     },
-    products: [],
+    news: [],
+    moment,
   }),
   mounted() {
     this.loadData();
@@ -330,15 +340,15 @@ export default {
   methods: {
     loadData() {
       axios
-        .get("http://localhost:3001/product")
+        .get("http://localhost:3001/news")
         .then(({ data }) => {
-          this.products = data.body;
+          this.news = { ...data.body };
         })
         .catch((e) => console.log(e));
     },
     registerProduct() {
       axios
-        .post("http://localhost:3001/product", this.form)
+        .post("http://localhost:3001/news", this.form)
         .then(({ data }) => {
           if (data.ok) {
             Swal.fire({
@@ -364,9 +374,8 @@ export default {
     },
     updateProduct(id) {
       if (this.form.image.includes("base64")) delete this.form.image;
-
       axios
-        .put(`http://localhost:3001/product/${id}`, this.form)
+        .put(`http://localhost:3001/news/${id}`, this.form)
         .then(({ data }) => {
           if (data.ok) {
             Swal.fire({
@@ -390,7 +399,32 @@ export default {
         })
         .catch(console.log);
     },
-    deleteProduct(product) {
+    changeState(id, state) {
+      axios
+        .put(`http://localhost:3001/news/${id}`, { state: !state })
+        .then(({ data }) => {
+          if (data.ok) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: data.message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            this.loadData();
+          } else {
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: data.message,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        })
+        .catch(console.log);
+    },
+    deleteProduct(News) {
       Swal.fire({
         title: "¿Estas seguro?",
         text: "!No podras reversir esto!",
@@ -403,7 +437,7 @@ export default {
         if (result.isConfirmed) {
           //   Swal.fire("Deleted!", "Your file has been deleted.", "success");
           axios
-            .delete(`http://localhost:3001/product/${product._id}`)
+            .delete(`http://localhost:3001/news/${News._id}`)
             .then(({ data }) => {
               if (data.ok) {
                 Swal.fire({
@@ -413,7 +447,7 @@ export default {
                   showConfirmButton: false,
                   timer: 1500,
                 });
-                this.products.splice(this.products.indexOf(product), 1);
+                this.news.splice(this.news.indexOf(News), 1);
               } else {
                 Swal.fire({
                   position: "top-end",
@@ -441,8 +475,8 @@ export default {
       };
       reader.readAsDataURL(file);
     },
-    setProduct(product) {
-      this.form = product;
+    setProduct(News) {
+      this.form = News;
     },
     reset() {
       this.form = {
